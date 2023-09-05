@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 function Popular() {
     const [popular, setPopular] = useState([]);
@@ -19,23 +21,32 @@ function Popular() {
 
     return (
         <div>
-            <h2>Popular Recipes</h2>
-            {popular.map(recipe => {
-                return (
-                  <Carousel>
-                    <h2>Popular Recipes</h2>
-                    {popular.map((recipe) => {
-                        return(
-                            <Card>
-                                <p>{recipe.title}</p>
-                                <img src={recipe.image} alt={recipe.title} />
-                            </Card>
-                        );
-                    })}
-                  </Carousel>  
-                )
-            }
-            )}
+            <Carousel>
+                <h2>Popular Recipes</h2>
+                <Splide
+                    options={{
+                        perPage: 4,
+                        arrows: false,
+                        pagination: true,
+                        drag: "free",
+                        gap: "1rem",
+                    }}
+                >
+                    {popular && popular.length > 0 ? (
+                        popular.map((recipe) => (
+                            <SplideSlide key={recipe.id}>
+                                <Card>
+                                    <p>{recipe.title}</p>
+                                    <img src={recipe.image} alt={recipe.title} />
+                                </Card>
+                            </SplideSlide>
+                        ))
+                    ) : (
+                        <p>Loading...</p>
+                    )}
+
+                </Splide>
+            </Carousel>  
         </div>
     )
 }
@@ -46,6 +57,27 @@ const Carousel = styled.div`
 
 const Card = styled.div`
     min-height: 25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+
+
+    img{
+        border-radius: 1rem;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+    }
+
+    p {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+    }
 `
 
 export default Popular;
