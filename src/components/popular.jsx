@@ -32,18 +32,18 @@ function Popular() {
                         gap: "1rem",
                     }}
                 >
-                    {popular && popular.length > 0 ? (
-                        popular.map((recipe) => (
-                            <SplideSlide key={recipe.id}>
-                                <Card>
-                                    <p>{recipe.title}</p>
-                                    <img src={recipe.image} alt={recipe.title} />
-                                </Card>
-                            </SplideSlide>
-                        ))
-                    ) : (
-                        <p>Loading...</p>
-                    )}
+                
+                {popular && popular.length > 0 && ( // Defining 'popular' to access length property
+                    popular.map((recipe) => (
+                        <SplideSlide key={recipe.id}>
+                            <Card>
+                                <p>{recipe.title}</p>
+                                <img src={recipe.image} alt={recipe.title} />
+                            </Card>
+                        </SplideSlide>
+                    ))
+                )}
+
 
                 </Splide>
             </Carousel>  
