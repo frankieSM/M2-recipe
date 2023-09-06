@@ -13,19 +13,22 @@ function Popular() {
 
     // Fetching recipes from Spoonacular API
     const getPopular = async () => {
-
         const check = localStorage.getItem('popular');
 
-        if(check){
+        if (check) {
             setPopular(JSON.parse(check));
-        }else{const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`)};
-            const data = await api.json();
+        } else {
+            try {
+                const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`);
+                const data = await api.json();
 
-            localStorage.setItem('popular', JSON.stringify(data.recipes));
-            console.log(data.recipes);
-            setPopular(data.recipes)
-        
-        
+                localStorage.setItem('popular', JSON.stringify(data.recipes));
+                console.log(data.recipes);
+                setPopular(data.recipes);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
     }
 
     return (
@@ -41,28 +44,25 @@ function Popular() {
                         gap: "1rem",
                     }}
                 >
-                
-                {popular && popular.length > 0 && ( // Defining 'popular' to access length property
-                    popular.map((recipe) => (
-                        <SplideSlide key={recipe.id}>
-                            <Card>
-                                <p>{recipe.title}</p>
-                                <img src={recipe.image} alt={recipe.title} />
-                            </Card>
-                        </SplideSlide>
-                    ))
-                )}
-
-
+                    {popular && popular.length > 0 && (
+                        popular.map((recipe) => (
+                            <SplideSlide key={recipe.id}>
+                                <Card>
+                                    <p>{recipe.title}</p>
+                                    <img src={recipe.image} alt={recipe.title} />
+                                </Card>
+                            </SplideSlide>
+                        ))
+                    )}
                 </Splide>
-            </Carousel>  
+            </Carousel>
         </div>
     )
 }
 
 const Carousel = styled.div`
     margin: 4rem 0rem;
-    `;
+`;
 
 const Card = styled.div`
     min-height: 25rem;
@@ -70,15 +70,13 @@ const Card = styled.div`
     overflow: hidden;
     position: relative;
 
-
-    img{
+    img {
         border-radius: 1rem;
         position: absolute;
         left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-
     }
 
     p {
@@ -90,3 +88,4 @@ const Card = styled.div`
 `
 
 export default Popular;
+
