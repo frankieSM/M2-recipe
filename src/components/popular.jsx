@@ -4,12 +4,12 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 function Popular() {
-    const [popular, setPopular] = useState([]);
+  const [popular, setPopular] = useState([]);
 
-    // Running the function
-    useEffect(() => {
-        getPopular();
-    }, []);
+  // Running the function
+  useEffect(() => {
+    getPopular();
+  }, []);
 
     // Fetching recipes from Spoonacular API
     const getPopular = async () => {
