@@ -4,28 +4,28 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 
-function Desserts() {
-  const [desserts, setDesserts] = useState([]);
+function Vegan() {
+  const [vegan, setVegan] = useState([]);
 
   // Running the function
   useEffect(() => {
-    getDesserts();
+    getVegan();
   }, []);
 
   // Fetching recipes from Spoonacular API
-  const getDesserts = async () => {
-    const check = localStorage.getItem('desserts');
+  const getVegan = async () => {
+    const check = localStorage.getItem('vegan');
 
     if (check) {
-        setDesserts(JSON.parse(check));
+        setVegan(JSON.parse(check));
     } else {
         try {
-            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&type=dessert`);
+            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&diet=vegan`);
             const data = await api.json();
 
-            localStorage.setItem('desserts', JSON.stringify(data.recipes));
+            localStorage.setItem('vegan', JSON.stringify(data.recipes));
             console.log(data.recipes);
-            setDesserts(data.recipes);
+            setVegan(data.recipes);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -36,7 +36,7 @@ function Desserts() {
   return(
     <div>
       <Carousel>
-          <h2>Desserts</h2>
+          <h2>Vegan Recipes</h2>
           <Splide
               options={{
                   perPage: 4,
@@ -46,8 +46,8 @@ function Desserts() {
                   gap: "1rem",
               }}
           >
-              {desserts && desserts.length > 0 && (
-                  desserts.map((recipe) => (
+              {vegan && vegan.length > 0 && (
+                  vegan.map((recipe) => (
                       <SplideSlide key={recipe.id}>
                           <Card>
                               <p>{recipe.title}</p>
@@ -90,4 +90,4 @@ const Card = styled.div`
 `
 ;
 
-export default Desserts;
+export default Vegan;
