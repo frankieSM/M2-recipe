@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
@@ -11,58 +11,49 @@ function Popular() {
     getPopular();
   }, []);
 
-    // Fetching recipes from Spoonacular API
-    const getPopular = async () => {
-        const check = localStorage.getItem('popular');
+  // Fetching recipes from Spoonacular API
+  const getPopular = async () => {
+    const api = await fetch(
+      `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`
+    );
+    const data = await api.json();
+    console.log(data);
+    setPopular(data.recipes);
+  };
 
-        if (check) {
-            setPopular(JSON.parse(check));
-        } else {
-            try {
-                const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`);
-                const data = await api.json();
-
-                localStorage.setItem('popular', JSON.stringify(data.recipes));
-                console.log(data.recipes);
-                setPopular(data.recipes);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        }
-    }
-
-    return (
-        <div>
-            <Carousel>
-                <h2>Popular Recipes</h2>
-                <Splide
-                    options={{
-                        perPage: 4,
-                        arrows: false,
-                        pagination: true,
-                        drag: "free",
-                        gap: "1rem",
-                    }}
-                >
-                    {popular && popular.length > 0 && (
-                        popular.map((recipe) => (
-                            <SplideSlide key={recipe.id}>
-                                <Card>
-                                    <p>{recipe.title}</p>
-                                    <img src={recipe.image} alt={recipe.title} />
-                                </Card>
-                            </SplideSlide>
-                        ))
-                    )}
-                </Splide>
-            </Carousel>
-        </div>
-    )
+  return (
+    <div>
+        <Carousel>
+            <h2>Popular Recipes</h2>
+            <Splide
+                options={{
+                    perPage: 4,
+                    arrows: false,
+                    pagination: true,
+                    drag: "free",
+                    gap: "1rem",
+                }}
+            >
+                {popular && popular.length > 0 && (
+                    popular.map((recipe) => (
+                        <SplideSlide key={recipe.id}>
+                            <Card>
+                                <p>{recipe.title}</p>
+                                <img src={recipe.image} alt={recipe.title} />
+                            </Card>
+                        </SplideSlide>
+                    ))
+                )}
+            </Splide>
+        </Carousel>
+    </div>
+);
 }
 
 const Carousel = styled.div`
-    margin: 4rem 0rem;
-`;
+  margin: 4rem 0rem;`
+
+;
 
 const Card = styled.div`
     min-height: 25rem;
@@ -86,6 +77,6 @@ const Card = styled.div`
         font-weight: bold;
     }
 `
+;
 
 export default Popular;
-

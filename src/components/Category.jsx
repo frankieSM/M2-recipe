@@ -35,4 +35,4 @@ margin: 2rem 0rem;
 
 
 
-export default Category
+export default Category;
