@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Bebas+Neue&display=swap');
+
 .App {
-  text-align: center;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 100%; /* Set the width of your app container */
+
 }
 
 .App-logo {
@@ -38,5 +48,22 @@
 }
 
 body {
-  background-image: url('images/flame-background.avif');
+  margin: 0;
+  padding: 0;
+  background-image: url('./images/flame-border-background-black-realistic-fire-image.jpg');
+  background-size: contain;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: white;
+  font-size: 38px;
+}
+
+p {
+  font-family: 'Barlow Condensed', sans-serif;
+  color: white;
+  font-size: 22px;
 }

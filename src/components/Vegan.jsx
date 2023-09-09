@@ -20,7 +20,7 @@ function Vegan() {
         setVegan(JSON.parse(check));
     } else {
         try {
-            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&diet=vegan`);
+            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&tags=vegan`);
             const data = await api.json();
 
             localStorage.setItem('vegan', JSON.stringify(data.recipes));
@@ -62,18 +62,18 @@ function Vegan() {
 }
 
 const Carousel = styled.div`
-  margin: 4rem 10rem;`
+  margin: 4rem 25rem;
+  text-align: center;`
 
 ;
 
 const Card = styled.div`
-    min-height: 25rem;
-    border-radius: 1rem;
+    min-height: 19rem;
     overflow: hidden;
     position: relative;
 
     img {
-        border-radius: 1rem;
+
         position: absolute;
         left: 0;
         width: 100%;
