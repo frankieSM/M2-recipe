@@ -15,11 +15,10 @@ app.get("/searched/:search", (req, res) => {
   res.send(`You searched for: ${searchTerm}`);
 });
 
-
 mongoose
   .connect(
     process.env.DB_URI ||
-    "mongodb://random:Mt03ks8ry87nDdG4@ac-dfxmsll-shard-00-00.dzfmbec.mongodb.net:27017,ac-dfxmsll-shard-00-01.dzfmbec.mongodb.net:27017,ac-dfxmsll-shard-00-02.dzfmbec.mongodb.net:27017/?ssl=true&replicaSet=atlas-10n54b-shard-0&authSource=admin&retryWrites=true&w=majority",
+      "mongodb+srv://jrhitman5150:G3veVXCYVWlM33Hf@recipe2.prnx0jf.mongodb.net/?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
