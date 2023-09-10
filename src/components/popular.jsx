@@ -1,52 +1,94 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+
 
 function Popular() {
-  const [popular, setPopular] = useState([]);
+    const [popular, setPopular] = useState([]);
+  
+    // Running the function
+    useEffect(() => {
+      getPopular();
+    }, []);
 
-  // Running the function
-  useEffect(() => {
-    getPopular();
-  }, []);
-
-  // Fetching recipes from Spoonacular API
-  const getPopular = async () => {
-    const api = await fetch(
-      `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`
-    );
-    const data = await api.json();
-    console.log(data);
-    setPopular(data.recipes);
+    // Fetching recipes from Spoonacular API
+    const getPopular = async () => {
+      const check = localStorage.getItem('popular');
+  
+      //Store data into localStorage so it doesn't ping the API too many times
+      if (check) {
+          setPopular(JSON.parse(check));
+      } else {
+          try {
+              const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`);
+              const data = await api.json();
+  
+              localStorage.setItem('popular', JSON.stringify(data.recipes));
+              console.log(data.recipes);
+              setPopular(data.recipes);
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
+      }
   };
-
-  return (
-    <div>
-      <h2>Popular Recipes</h2>
-      {popular.map((recipe) => {
-        return (
-          <Carousel>
-            <h2>Popular Recipes</h2>
-            {popular.map((recipe) => {
-              return (
-                <Card>
-                  <p>{recipe.title}</p>
-                  <img src={recipe.image} alt={recipe.title} />
-                </Card>
-              );
-            })}
-          </Carousel>
-        );
-      })}
-    </div>
-  );
-}
+  
+  
+    return(
+      <div>
+        <Carousel>
+            <h2>Most Popular</h2>
+            <Splide
+                options={{
+                    perPage: 4,
+                    arrows: false,
+                    pagination: true,
+                    drag: "free",
+                    gap: "1rem",
+                }}
+            >
+                {popular && popular.length > 0 && (
+                    popular.map((recipe) => (
+                        <SplideSlide key={recipe.id}>
+                            <Card>
+                                <p>{recipe.title}</p>
+                                <img src={recipe.image} alt={recipe.title} />
+                            </Card>
+                        </SplideSlide>
+                    ))
+                )}
+            </Splide>
+        </Carousel>
+      </div>);
+  }
 
 const Carousel = styled.div`
-  margin: 4rem 0rem;
-`;
+  margin: 4rem 25rem;
+  text-align: center;`
+
+;
 
 const Card = styled.div`
-  min-height: 25rem;
-`;
+    min-height: 19rem;
+    overflow: hidden;
+    position: relative;
+
+    img {
+
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    p {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+    }
+`
+;
 
 export default Popular;
