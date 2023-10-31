@@ -5,31 +5,31 @@ import { message } from "antd";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
-function Desserts() {
-  const [desserts, setDesserts] = useState([]);
+function Vegan() {
+  const [vegan, setVegan] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    getDesserts();
+    getVegan();
   }, []);
 
-  const getDesserts = async () => {
+  const getVegan = async () => {
     try {
       const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&tags=dessert`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&tags=vegan`
       );
       const data = await api.json();
-      setDesserts(data.recipes);
+      setVegan(data.recipes);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching dessert recipes:", error);
+      console.error("Error fetching vegan recipes:", error);
       setLoading(false);
     }
   };
 
-  const addToFavorites = async (recipeId, recipeTitle) => {
+  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/addRecipe/${userId}`,
@@ -54,7 +54,7 @@ function Desserts() {
   return (
     <div>
       <Carousel>
-        <h2>Sweet Treats</h2>
+        <h2>Our Vegan Picks</h2>
         <Splide
           options={{
             perPage: 4,
@@ -64,9 +64,9 @@ function Desserts() {
             gap: "1rem",
           }}
         >
-          {desserts &&
-            desserts.length > 0 &&
-            desserts.map((recipe) => (
+          {vegan &&
+            vegan.length > 0 &&
+            vegan.map((recipe) => (
               <SplideSlide key={recipe.id}>
                 <Card>
                   <CardTitle>{recipe.title}</CardTitle>
@@ -124,4 +124,4 @@ const CardTitle = styled.p`
   margin: 0;
 `;
 
-export default Desserts;
+export default Vegan;

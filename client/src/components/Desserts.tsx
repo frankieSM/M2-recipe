@@ -5,31 +5,31 @@ import { message } from "antd";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
-function Popular() {
-  const [popular, setPopular] = useState([]);
+function Desserts() {
+  const [desserts, setDesserts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    getPopular();
+    getDesserts();
   }, []);
 
-  const getPopular = async () => {
+  const getDesserts = async () => {
     try {
       const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&tags=dessert`
       );
       const data = await api.json();
-      setPopular(data.recipes);
+      setDesserts(data.recipes);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching popular recipes:", error);
+      console.error("Error fetching dessert recipes:", error);
       setLoading(false);
     }
   };
 
-  const addToFavorites = async (recipeId, recipeTitle) => {
+  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/addRecipe/${userId}`,
@@ -54,7 +54,7 @@ function Popular() {
   return (
     <div>
       <Carousel>
-        <h2>Most Popular</h2>
+        <h2>Sweet Treats</h2>
         <Splide
           options={{
             perPage: 4,
@@ -64,9 +64,9 @@ function Popular() {
             gap: "1rem",
           }}
         >
-          {popular &&
-            popular.length > 0 &&
-            popular.map((recipe) => (
+          {desserts &&
+            desserts.length > 0 &&
+            desserts.map((recipe) => (
               <SplideSlide key={recipe.id}>
                 <Card>
                   <CardTitle>{recipe.title}</CardTitle>
@@ -124,4 +124,4 @@ const CardTitle = styled.p`
   margin: 0;
 `;
 
-export default Popular;
+export default Desserts;

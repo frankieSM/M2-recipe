@@ -5,31 +5,31 @@ import { message } from "antd";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
-function Vegan() {
-  const [vegan, setVegan] = useState([]);
+function Popular() {
+  const [popular, setPopular] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    getVegan();
+    getPopular();
   }, []);
 
-  const getVegan = async () => {
+  const getPopular = async () => {
     try {
       const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&tags=vegan`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8`
       );
       const data = await api.json();
-      setVegan(data.recipes);
+      setPopular(data.recipes);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching vegan recipes:", error);
+      console.error("Error fetching popular recipes:", error);
       setLoading(false);
     }
   };
 
-  const addToFavorites = async (recipeId, recipeTitle) => {
+  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/addRecipe/${userId}`,
@@ -54,7 +54,7 @@ function Vegan() {
   return (
     <div>
       <Carousel>
-        <h2>Our Vegan Picks</h2>
+        <h2>Most Popular</h2>
         <Splide
           options={{
             perPage: 4,
@@ -64,9 +64,9 @@ function Vegan() {
             gap: "1rem",
           }}
         >
-          {vegan &&
-            vegan.length > 0 &&
-            vegan.map((recipe) => (
+          {popular &&
+            popular.length > 0 &&
+            popular.map((recipe) => (
               <SplideSlide key={recipe.id}>
                 <Card>
                   <CardTitle>{recipe.title}</CardTitle>
@@ -124,4 +124,4 @@ const CardTitle = styled.p`
   margin: 0;
 `;
 
-export default Vegan;
+export default Popular;
