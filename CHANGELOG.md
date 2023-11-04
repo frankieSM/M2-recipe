@@ -1,0 +1,81 @@
+-Create README.md
+-Pull index.js in server from frankieSM_2.
+-Remove failed code for deployment
+-Add backend url to app.
+-Update README.md
+-Edit README.md
+-Add Vegan/Dessert components. Render on Home.
+-Style changes Search and Popular
+-Add favorites button to Recipe.jsx. Style changes to Popular.jsx.
+-Install react-splide. Implement carousel component to Popular.jsx. Style changes to pop.
+-CHANGES TO CUISINE AND SEARCHED ROUTES
+-Recipe not rendered. Search and NavBar functioning.
+-New API key. Commit before moving Recipe.jsx
+-New commit
+-New Mongo branch. Rename files. Initial commit.
+-Finished database
+-updated api key
+-Resolved merge conflict
+-dont worry about this commit
+-Fix Link in Searched. Fix typo dangerouslySetInnerHTML. Recipe path successfully reached and rendered.
+-Add Link from react-router-dom to Searched.jsx. Changed Button tag capitalization. Recipe still not rendering.
+-Heavy styling to Search.jsx and Searched.jsx. No link yet from searched items to Recipe view.
+-Comment out framer-motion import. Team still plans to use it in the future should time allow.
+-Rename home.jsx to Home.jsx
+-Resolve merge conflict and rename home.jsx to Home.jsx
+-Rename home.jsx to Home.jsx
+-Merge pull request #10 from frankieSM/frankieSM
+-Merge branch 'master' into frankieSM
+-Update Home.jsx
+-Capitalize all components and pages files.
+-Change imports and renders of Home.jsx page. Reconfigure how components are rendered.
+-Save before checking main branch.
+-implement useNavigate into Search.jsx to link to Searched page view. cannot confirm due to errors in other components.
+-Edit App.js with more components. Errros in icons.
+-Merge pull request #9 from frankieSM/roberto_branch
+-updated cuisines
+-Merge pull request #8 from frankieSM/roberto_branch
+-Update Cuisine.jsx
+-updated cuisines
+-Merge branch 'frankieSM' of https://github.com/frankieSM/M2-recipe into frankieSM
+-Add useState, useEffect for dynamic search change
+-updated cuisines
+-Merge pull request #6 from frankieSM/frankieSM
+-Merge branch 'master' into frankieSM
+-Update page
+-Comment out framer-motion in Cuisine. Capitalize Home.jsx
+-Edit Searched.jsx v1 of Searched function to allow for queries within API
+-Merge pull request #5 from frankieSM/robert_branch
+-Update Home.jsx
+-Changes to long recipe page
+-RRevert "Create Searched.jsx page"
+-Create Searched.jsx page
+-Merge branch 'master' of https://github.com/frankieSM/M2-recipe into frankieSM
+-Save changes before pull
+-Merge pull request #4 from Rodriguezrob2023/robert_branch
+-Merge branch 'master' into robert_branch
+-Merge pull request #1 from frankieSM/sleeann
+-Merge branch 'master' into sleeann
+-updates
+-Merge pull request #3 from frankieSM/frankieSM
+-Edit Pages.jsx Corrected typo.
+-Popular component will render recipe names and pictures
+-Edit Pages.jsx Added new routes for future pages
+-Create Pages.jsx. Includes routes for react router pages
+-Popular component will return recipe names
+-Making pages route with HOME
+-Added Spoonacular API to popular component
+-Reformat Home.jsx. Now renders Search, Popular, Dessert components collectively.
+-Making category components
+-Debugged holes from deleting unnecessary files from  react app
+-Merge pull request #2 from Rodriguezrob2023/robert_branch
+-Fixed desserts and app.js conflicts
+-Merge branch 'master' of https://github.com/frankieSM/M2-recipe into sleeann
+-Merge remote-tracking branch 'upstream/master' into robert_branch
+-Import desserts, popular components, and Home page from branch 'sleeann'
+-Create Search component. Basic search bar for the home page using styled-components
+-Updated server database
+-Added popular and dessert components, and home page
+-First component of popular.jsx
+-Create server director with index.js
+-Initialize project using Create React App
